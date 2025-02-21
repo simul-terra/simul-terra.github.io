@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galleri - Foreningen Simulterra</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #faf7f4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* HEADER */
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem 2rem;
+      position: relative;
+      transition: 0.3s;
+    }
+    header:hover:not(.menu-open) {
+      background: #fff;
+      color: #E74C3C;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.3s;
+    }
+    .logo:hover {
+      text-decoration: none;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+      user-select: none;
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #2c3e50;
+      color: #fff;
+      display: none;
+      flex-direction: column;
+      min-width: 200px;
+      padding: 1rem;
+      border: none;
+      transition: 0.3s;
+      z-index: 10;
+    }
+
+    .mobile-menu a {
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+    }
+    .mobile-menu a:hover {
+      background: #fff;
+      color: #E74C3C;
+    }
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Fjern fast højde og cover, så de ikke beskæres */
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* LIGHTBOX / MODAL */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-arrow {
+      font-size: 3rem;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 1rem;
+    }
+
+    .lightbox-arrow:hover {
+      color: #eee;
+    }
+
+    /* NAVIGATIONSBOKSE */
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      margin: 2rem 0 0 0;
+      padding: 0;
+    }
+    .section-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.3s;
+      aspect-ratio: 1 / 1;
+      color: #fff;
+    }
+    .om {
+      background: #E74C3C;
+    }
+    .projekter {
+      background: #3498DB;
+    }
+    .galleri {
+      background: #2ECC71;
+    }
+    .kontakt {
+      background: #F1C40F;
+    }
+    .om:hover {
+      background: #fff;
+      color: #E74C3C;
+    }
+    .projekter:hover {
+      background: #fff;
+      color: #3498DB;
+    }
+    .galleri:hover {
+      background: #fff;
+      color: #2ECC71;
+    }
+    .kontakt:hover {
+      background: #fff;
+      color: #F1C40F;
+    }
+
+    @media(max-width: 800px) {
+      .sections {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 400px) {
+      /* Tving grid til 1 kolonne, og fjern kvadratisk beskæring */
+      .gallery-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .gallery-grid img {
+        aspect-ratio: auto !important;
+        width: 100%;
+        height: auto;
+        object-fit: unset !important;
+      }
+      .sections {
+        grid-template-columns: 1fr;
+      }
+    }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">Foreningen Simulterra</a>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Forside</a>
+      <a href="om.html">Om os</a>
+      <a href="projekter.html">Projekter</a>
+      <a href="galleri.html">Galleri</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </header>
+
+  <main>
+    <h2>Galleri</h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Alle billeder (nye + tidligere) -->
+      <img src="images/7e9f4b0b-636d-4f62-addd-619e37ec2db4_rw_1920.png" alt="Billede 1" />
+      <img src="images/99ceb99e-c0f5-4bd7-b934-035cca78190d_rw_1920.jpg" alt="Billede 2" />
+      <img src="images/01602df1-8355-400a-9add-8506b55859f3_rw_1920.png" alt="Billede 3" />
+      <img src="images/cb815a0e-1a64-4937-8e7f-bba565cc645f_rw_1920.jpg" alt="Billede 4" />
+      <img src="images/793fc867-26f8-425d-a4b4-781945a90c6d_rw_1920.png" alt="Billede 5" />
+      <img src="images/2b52e07c-2f00-4950-9b74-bc404073a1ea_rw_1920.jpg" alt="Billede 6" />
+      <img src="images/946cf311-8c52-4434-8e37-a65ae5cf133b_rw_1920.png" alt="Billede 7" />
+      <img src="images/898f2ea5-0b6f-4b35-b7e8-d6a125c02d8e_rw_1920.jpg" alt="Billede 9" />
+      <img src="images/1672bd74-cfa1-4dd3-a486-d7f4e0a5a05b_rw_1920.jpg" alt="Billede 10" />
+      <img src="images/f19c4c97-095c-4870-9e9f-f99ce035f3e7_rw_1920.jpg" alt="Billede 11" />
+      <img src="images/8c0e537f-8547-43c4-8450-4d15c06f07b7_rw_1920.jpg" alt="Billede 12" />
+      <img src="images/cc570bae-2ce8-45a2-8f99-36107772a266_rw_1920.jpg" alt="Billede 13" />
+      <img src="images/daef441f-b285-41ac-b1b5-19d0550366d5_rw_1920.jpg" alt="Billede 14" />
+      <img src="images/421f922e-e196-4bc3-8342-eeb2b1f521ab_rw_1920.jpg" alt="Billede 15" />
+      <img src="images/604013d3-6409-4d61-8c42-6eae887eced8_rw_1920.jpg" alt="Billede 16" />
+      <img src="images/c8c21f39-6048-4240-992b-8985c802933c_rw_1920.jpg" alt="Billede 17" />
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-close" id="lightboxClose">&times;</div>
+      <div class="lightbox-nav">
+        <div class="lightbox-arrow" id="prevArrow">&#10094;</div>
+        <div class="lightbox-arrow" id="nextArrow">&#10095;</div>
+      </div>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">  
+    </div>
+  </main>
+
+  <!-- 4 navigation firkanter -->
+  <div class="sections">
+    <a class="section-box om" href="om.html">Om os</a>
+    <a class="section-box projekter" href="projekter.html">Projekter</a>
+    <a class="section-box galleri" href="galleri.html">Galleri</a>
+    <a class="section-box kontakt" href="kontakt.html">Kontakt</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const header = document.querySelector('header');
+      menu.classList.toggle('active');
+      header.classList.toggle('menu-open');
+    }
+
+    // Lightbox funktionalitet
+    const galleryGrid = document.getElementById('galleryGrid');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const prevArrow = document.getElementById('prevArrow');
+    const nextArrow = document.getElementById('nextArrow');
+
+    // Saml alle billeder i galleriet i en liste
+    const galleryImages = Array.from(galleryGrid.querySelectorAll('img'));
+    let currentIndex = 0;
+
+    // Åbn lightbox
+    function openLightbox(index) {
+      currentIndex = index;
+      const imgSrc = galleryImages[index].getAttribute('src');
+      const altText = galleryImages[index].getAttribute('alt');
+      lightboxImg.src = imgSrc;
+      lightboxImg.alt = altText;
+      lightbox.classList.add('active');
+    }
+
+    // Luk lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+    }
+
+    // Forrige billede
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      const imgSrc = galleryImages[currentIndex].getAttribute('src');
+      const altText = galleryImages[currentIndex].getAttribute('alt');
+      lightboxImg.src = imgSrc;
+      lightboxImg.alt = altText;
+    }
+
+    // Næste billede
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      const imgSrc = galleryImages[currentIndex].getAttribute('src');
+      const altText = galleryImages[currentIndex].getAttribute('alt');
+      lightboxImg.src = imgSrc;
+      lightboxImg.alt = altText;
+    }
+
+    // Klik på galleri-billede => åbner lightbox
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        openLightbox(index);
+      });
+    });
+
+    // Klik på close => luk lightbox
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    // Klik på arrow => naviger
+    prevArrow.addEventListener('click', prevImage);
+    nextArrow.addEventListener('click', nextImage);
+
+    // Tastatur-navigation
+    document.addEventListener('keydown', (e) => {
+      if(!lightbox.classList.contains('active')) return;
+      if(e.key === 'ArrowLeft') {
+        prevImage();
+      } else if(e.key === 'ArrowRight') {
+        nextImage();
+      } else if(e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+
+    // Klik på overlay => luk lightbox
+    lightbox.addEventListener('click', (e) => {
+      // Hvis man klikker på baggrunden (ikke på billedet eller pile-ikonet), lukkes
+      if(e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>

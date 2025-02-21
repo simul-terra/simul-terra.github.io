@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Foreningen Simulterra - Forside</title>
+  <title>Om os - Foreningen Simulterra</title>
   <style>
-    /* Importér en Google Font for Tumblr-lignende feel (eksempelvis Montserrat) */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
-    /* NULSTIL OG GENERELT */
     * {
       margin: 0;
       padding: 0;
@@ -24,25 +22,23 @@
       color: #333;
     }
 
-    /* Øverste bjælke (header) */
+    /* HEADER */
     header {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #2c3e50; /* Ny afdæmpet farve */
+      background: #2c3e50;
       color: #fff;
       padding: 1rem 2rem;
       position: relative;
       transition: 0.3s;
     }
-    /* Invertion ved hover (hele bjælken) */
     header:hover:not(.menu-open) {
       background: #fff;
       color: #E74C3C;
     }
 
-    /* Logo-tekst (når man klikker, går man til forsiden) */
     .logo {
       font-weight: 700;
       font-size: 1.6rem;
@@ -51,12 +47,10 @@
       color: inherit;
       transition: 0.3s;
     }
-
     .logo:hover {
       text-decoration: none;
     }
 
-    /* Menu-ikon (hamburger) */
     .menu-icon {
       cursor: pointer;
       font-size: 1.5rem;
@@ -64,27 +58,20 @@
       transition: 0.3s;
     }
 
-    /* Den skjulte menu, der foldes ud ved klik på hamburger-ikonet */
     .mobile-menu {
       position: absolute;
       top: 100%;
       right: 0;
       background: #2c3e50;
       color: #fff;
-      display: none; /* Skjult som udgangspunkt */
+      display: none;
       flex-direction: column;
       min-width: 200px;
-padding: 1rem;
+      padding: 1rem;
       border: none;
       transition: 0.3s;
       z-index: 10;
     }
-
-    /* Ved hover på header i normal tilstand => invert, men menuens baggrund skal matche ny farve.
-       For at undgå forvirring, fixeres menuen til egen hover-stil. */
-
-    /* Vi løser det ved at style .mobile-menu i en stand alone tilstand,
-       og en .active-klasse til toggling.  */
 
     .mobile-menu a {
       padding: 0.5rem 1rem;
@@ -93,85 +80,65 @@ padding: 1rem;
       display: block;
       transition: 0.3s;
     }
-
     .mobile-menu a:hover {
       background: #fff;
       color: #E74C3C;
     }
 
-    /* .active klasse, viser menuen */
     .mobile-menu.active {
       display: flex;
     }
 
-    /* HERO SECTION */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 80vh;
-      background: url('images/cb815a0e-1a64-4937-8e7f-bba565cc645f_rw_1920.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      color: #fff;
-      max-width: 700px;
-      padding: 1rem;
-      margin-top: 2rem; /* Giver luft i toppen af hero */
-    }
-
-    .hero-content h2 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-    }
-
-    .hero-content p {
-      font-size: 1.2rem;
-      font-weight: 300;
-      margin-bottom: 0;
-    }
-
+    /* MAIN CONTENT */
     main {
       flex: 1;
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
       display: flex;
       flex-direction: column;
-      width: 100%;
+      gap: 2rem;
     }
 
-    .intro {
-      max-width: 800px;
-      margin: 2rem auto;
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-text {
+      line-height: 1.7;
       text-align: justify;
-      line-height: 1.8;
-      padding: 0 1rem;
     }
 
-    /* 4 FIRKANTER SOM LINKS TIL OM, PROJEKTER, GALLERI, KONTAKT */
+    /* BILLEDGALLERI / BILLEDER */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .image-gallery img {
+      width: 100%;
+      height: 300px; /* Ens højde for billederne */
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    @media(max-width: 700px) {
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* NAVIGATIONSBOKSE (kopieret fra forsiden) */
     .sections {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       width: 100%;
-      margin: 0;
+      margin: 2rem 0 0 0;
       padding: 0;
     }
-
     .section-box {
       display: flex;
       align-items: center;
@@ -182,24 +149,20 @@ padding: 1rem;
       text-transform: uppercase;
       transition: 0.3s;
       aspect-ratio: 1 / 1;
-      color: #fff; /* Standard tekstfarve er hvid */
+      color: #fff;
     }
-
-    /* Hver firkant får sin egen farve */
     .om {
-      background: #E74C3C; /* Rød */
+      background: #E74C3C;
     }
     .projekter {
-      background: #3498DB; /* Blå */
+      background: #3498DB;
     }
     .galleri {
-      background: #2ECC71; /* Grøn */
+      background: #2ECC71;
     }
     .kontakt {
-      background: #F1C40F; /* Gul */
+      background: #F1C40F;
     }
-
-    /* Inverter farver på hover */
     .om:hover {
       background: #fff;
       color: #E74C3C;
@@ -217,7 +180,6 @@ padding: 1rem;
       color: #F1C40F;
     }
 
-    /* Mindre skærmstørrelser */
     @media(max-width: 800px) {
       .sections {
         grid-template-columns: 1fr 1fr;
@@ -229,14 +191,24 @@ padding: 1rem;
         grid-template-columns: 1fr;
       }
     }
+
+    /* Link styling for the vedtægter link in intro-text */
+    .intro-text a {
+      color: #2c3e50;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .intro-text a:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
   <header>
-    <!-- Ved klik: Gå til forsiden -->
     <a class="logo" href="index.html">Foreningen Simulterra</a>
     <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-    <!-- Skjult menu -->
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html">Forside</a>
       <a href="om.html">Om os</a>
@@ -246,42 +218,54 @@ padding: 1rem;
     </div>
   </header>
 
-  <!-- Hero sektion -->
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h2>Eventyr uden grænser</h2>
-      <p>Vi udforsker og formidler natur- og kulturarv gennem bæredygtige ekspeditioner.</p>
-    </div>
-  </section>
-
   <main>
-    <div class="intro">
+    <h2>Om os</h2>
+    <div class="intro-text">
       <p>
-        Simulterra er en nyopstartet forening, der har som formål at støtte og skabe filmiske,
-        kunstneriske og videnskabelige projekter, der fremmer bæredygtig rejseform,
-        visuel formidling og kulturel dokumentation. Gennem ekspeditioner og feltstudier
-        ønsker vi at udforske natur- og kulturarv og bidrage til en dybere forståelse og
-        bevarelse af disse.
+        Foreningen Simulterra er skabt for at fremme bæredygtig rejseform, kulturel
+        dokumentation og visuel formidling. Vores passion er at udforske verden på en
+        langsom, men samtidig eventyrlig måde. Gennem ekspeditioner, filmiske og
+        kunstneriske projekter inspirerer vi til en dybere indsigt i både natur- og kulturskatte.
       </p>
       <br>
       <p>
-        Vi tror på, at eventyrlyst og nysgerrighed er afgørende drivkræfter for at skabe nye
-        idéer og perspektiver, og at en langsom og bæredygtig rejseform åbenbarer
-        meningsfulde indsigter i både menneskelige relationer og vores fælles planet.
+        Vi tror på værdien af at opleve verden i øjenhøjde, hvor autentiske møder med
+        lokalsamfund og en respektfuld tilgang til miljøet åbner døre til nye historier
+        og perspektiver. Vores forening består af eventyrlystne medlemmer
+        med forskellige grader af ekspertise inden for film, fotografi, antropologi, kunst og naturvidenskab.
       </p>
-      
     </div>
 
+    <div class="image-gallery">
+      <img src="images/f19c4c97-095c-4870-9e9f-f99ce035f3e7_rw_1920.jpg" alt="Kvinde i røg"/>
+      <img src="images/cc570bae-2ce8-45a2-8f99-36107772a266_rw_1920.jpg" alt="Bjerge og natur"/>
+      <!-- Tilføj flere billeder efter ønske -->
+    </div>
+
+    <div class="intro-text">
+      <p>
+        Gennem vores projekter søger vi at dokumentere og bevare unikke traditioner,
+        ritualer og levemåder, før de forsvinder i en stadigt mere globaliseret verden.
+        Vi ønsker, at vores arbejde skal inspirere flere mennesker til at rejse med omtanke, fordybelse og åbenhed over for nye kulturer.
+      </p>
+      <br>
+      <p>
+        Er du nysgerrig på at høre mere om vores forening, eller ønsker du at samarbejde, så er du altid velkommen til at kontakte os.
+      </p>
+      <br>
+      <a href="dokumenter/vedtaegter.pdf">Foreningens vedtægter</a>
+    </div>
+
+  </main>
+
+  <!-- 4 navigation firkanter -->
     <div class="sections">
-      <a class="section-box om" href="om.html">Om Os</a>
+      <a class="section-box om" href="om.html">Om os</a>
       <a class="section-box projekter" href="projekter.html">Projekter</a>
       <a class="section-box galleri" href="galleri.html">Galleri</a>
       <a class="section-box kontakt" href="kontakt.html">Kontakt</a>
     </div>
-  </main>
 
-  <!-- Simpelt script til at toggle menuen -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');

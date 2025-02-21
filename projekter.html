@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projekter - Foreningen Simulterra</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #faf7f4;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* HEADER */
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #2c3e50;
+      color: #fff;
+      padding: 1rem 2rem;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    header:hover:not(.menu-open) {
+      background: #fff;
+      color: #E74C3C;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.3s;
+    }
+    .logo:hover {
+      text-decoration: none;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      font-size: 1.5rem;
+      user-select: none;
+      transition: 0.3s;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #2c3e50;
+      color: #fff;
+      display: none;
+      flex-direction: column;
+      min-width: 200px;
+      padding: 1rem;
+      border: none;
+      transition: 0.3s;
+      z-index: 10;
+    }
+
+    .mobile-menu a {
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .mobile-menu a:hover {
+      background: #fff;
+      color: #E74C3C;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* PROJEKTER */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centrerer indholdet horisontalt */
+      gap: 2rem;
+      margin: 0 auto;
+      max-width: 800px; /* Gør projekt-sektionen lidt bredere, men stadig overskuelig */
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1rem;
+      width: 100%; /* Fylder hele bredden af .projects-grid */
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .project-images img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    .project-description {
+      line-height: 1.6;
+      text-align: justify;
+    }
+
+    /* NAVIGATIONSBOKSE (samme stil som på de andre sider) */
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      width: 100%;
+      margin: 2rem 0 0 0;
+      padding: 0;
+    }
+    .section-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: 0.3s;
+      aspect-ratio: 1 / 1;
+      color: #fff;
+    }
+    .om {
+      background: #E74C3C;
+    }
+    .projekter {
+      background: #3498DB;
+    }
+    .galleri {
+      background: #2ECC71;
+    }
+    .kontakt {
+      background: #F1C40F;
+    }
+
+    .om:hover {
+      background: #fff;
+      color: #E74C3C;
+    }
+    .projekter:hover {
+      background: #fff;
+      color: #3498DB;
+    }
+    .galleri:hover {
+      background: #fff;
+      color: #2ECC71;
+    }
+    .kontakt:hover {
+      background: #fff;
+      color: #F1C40F;
+    }
+
+    @media(max-width: 800px) {
+      .sections {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width: 400px) {
+      .sections {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">Foreningen Simulterra</a>
+    <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Forside</a>
+      <a href="om.html">Om os</a>
+      <a href="projekter.html">Projekter</a>
+      <a href="galleri.html">Galleri</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </header>
+
+  <main>
+    <h2>Projekter</h2>
+    <div class="projects-grid">
+      <!-- Første projekt: What Dwells in Nature -->
+      <article class="project-card">
+        <h3>What Dwells in Nature</h3>
+        <div class="project-images">
+          <!-- Billedet erstattet med 421f922e-e196-4bc3-8342-eeb2b1f521ab_rw_1920.jpg -->
+          <img src="images/421f922e-e196-4bc3-8342-eeb2b1f521ab_rw_1920.jpg" alt="Billede til What Dwells in Nature" />
+          <img src="images/cb815a0e-1a64-4937-8e7f-bba565cc645f_rw_1920.jpg" alt="Billede til What Dwells in Nature" />
+        </div>
+        <p class="project-description">
+          <strong>What Dwells in Nature</strong> undersøger grænsefladen mellem natur, kultur og
+          spiritualitet gennem en kunstnerisk dokumentarisk tilgang. Projektet baserer sig på en
+          cykelrejse fra Danmark til Kina, hvor de rejsende besøger forskellige lokalsamfund og
+          undersøger deres skik og tro i sammenhæng med naturen.
+        </p>
+        <p class="project-description">
+          Inspireret af film som <em>Koyaanisqatsi</em> og <em>Samsara</em> skaber projektet en
+          sanselig filmoplevelse, der sætter fokus på de spirituelle og mytiske aspekter af
+          naturen, som ofte negligeres i en moderne, globaliseret verden. Gennem langsom,
+          bæredygtig rejseform på cykel opstår autentiske møder med mennesker, som deler
+          deres historier, traditioner og ritualer, inden de forsvinder.
+        </p>
+        <p class="project-description">
+          Projektet har relevans for bevarelsen af immateriel kulturarv, da myter, ritualer og
+          kulturers forhold til naturen er under forandring. Ved at dokumentere og formidle disse
+          traditioner søger <strong>What Dwells in Nature</strong> at inspirere til en dybere
+          forståelse af menneskets forbindelse til naturen og minde os om, hvor vigtigt det er
+          at bevare vores kulturelle og naturlige arv.
+        </p>
+      </article>
+      <!-- Flere fremtidige projekter kan tilføjes som nye <article> ... </article> under her -->
+    </div>
+  </main>
+
+  <div class="sections">
+    <a class="section-box om" href="om.html">Om os</a>
+    <a class="section-box projekter" href="projekter.html">Projekter</a>
+    <a class="section-box galleri" href="galleri.html">Galleri</a>
+    <a class="section-box kontakt" href="kontakt.html">Kontakt</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const header = document.querySelector('header');
+      menu.classList.toggle('active');
+      header.classList.toggle('menu-open');
+    }
+  </script>
+</body>
+</html>
